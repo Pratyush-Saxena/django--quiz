@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+</head>
+<style>
+    table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+<body>
+    <div style="text-align:center">
+        <h2>Hi {{usr_data.name}} </h4>
+    <h3> Your Score : {{usr_data.score}}</h3>
+    </div>
+    
+    <div id="scorecard">
+        <table>
+            <tr>
+                <th>Question</th>
+                <th>Difficulty</th>
+                <th>Your Answer</th>
+                <th>Correct Answer</th>
+                <th>Score</th>
+                <th>Your Score</th>
+            </tr>
+            {% for data in usr_data.ques_list %}
+            <tr>
+                <td>{{data.fields.question}}</td>
+                <td>{{data.fields.level}}</td>
+                <td>{{data.usr_ans.Value}}</td>
+                {% for ans in data.fields.answer %}
+                {% if ans.Answer %}
+                  <td>{{ans.Value}}</td>
+                {% endif %}  
+                {% endfor %}
+                <td>{{data.fields.score}}</td>
+                {% if data.usr_ans.Answer  %}
+                  <td>{{data.fields.score}}</td>
+                {% else %}
+                <td>0</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

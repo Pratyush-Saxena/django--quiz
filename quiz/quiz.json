@@ -1,0 +1,93 @@
+{
+  "response_code": 0,
+  "results": [
+    {
+      "category": "Celebrities",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "Named after a character he played in a 1969 film, what is the name of the ski resort in Utah that Robert Redford bought in 1968?",
+      "correct_answer": "Sundance",
+      "incorrect_answers": ["Woodward", "Turner", "Booker"]
+    },
+    {
+      "category": "Entertainment: Video Games",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "The most graphically violent game to precede the creation of the ESRB (Entertainment Software Rating Board) was...",
+      "correct_answer": "Mortal Kombat",
+      "incorrect_answers": ["Duke Nukem", "Resident Evil", "Doom"]
+    },
+    {
+      "category": "Entertainment: Video Games",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "Which franchise does the creature &quot;Slowpoke&quot; originate from?",
+      "correct_answer": "Pokemon",
+      "incorrect_answers": ["Dragon Ball", "Sonic The Hedgehog", "Yugioh"]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "What&#039;s the square root of 49?",
+      "correct_answer": "7",
+      "incorrect_answers": ["4", "12", "9"]
+    },
+    {
+      "category": "Entertainment: Video Games",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "In the game Dark Souls, what is the name of the region you&#039;re in for the majority of the game?",
+      "correct_answer": "Lordran",
+      "incorrect_answers": ["Drangleic", "Oolacile", "Catarina"]
+    },
+    {
+      "category": "Entertainment: Books",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "What is the title of the first Sherlock Holmes book by Arthur Conan Doyle?",
+      "correct_answer": "A Study in Scarlet",
+      "incorrect_answers": [
+        "The Sign of the Four",
+        "A Case of Identity",
+        "The Doings of Raffles Haw"
+      ]
+    },
+    {
+      "category": "Science: Gadgets",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "When was the Tamagotchi digital pet released?",
+      "correct_answer": "1996",
+      "incorrect_answers": ["1989", "1992", "1990"]
+    },
+    {
+      "category": "Vehicles",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "The LS1 engine is how many cubic inches?",
+      "correct_answer": "346",
+      "incorrect_answers": ["350", "355", "360"]
+    },
+    {
+      "category": "Science: Computers",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "In computing, what does LAN stand for?",
+      "correct_answer": "Local Area Network",
+      "incorrect_answers": [
+        "Long Antenna Node",
+        "Light Access Node",
+        "Land Address Navigation"
+      ]
+    },
+    {
+      "category": "Animals",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "What is the name of a rabbit&#039;s abode?",
+      "correct_answer": "Burrow",
+      "incorrect_answers": ["Nest", "Den", "Dray"]
+    }
+  ]
+}
