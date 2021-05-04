@@ -13,7 +13,7 @@
     <section class="callout" style="background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), url({% static 'quiz/assets/img/bg-callout.jpg'%});background-position: center center;background-repeat: no-repeat;background-size: cover;width: 100vw;height: 100vh;">
         <div class="container">
         {% if count <= 10 %}
-<form action="{% url 'quiz' %}" method="post">
+<form action="" method="post">
   {% csrf_token %}
   <legend style="font-size: x-large;font-weight: bold;">{{count}}.&nbsp;{{quest.fields.question}}&nbsp;&nbsp;&nbsp;<span>({{quest.fields.level}})</span></legend>
     {% for a in quest.fields.answer %}
