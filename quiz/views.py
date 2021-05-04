@@ -17,8 +17,8 @@ hard_quest=json.loads(serializers.serialize('json',question.objects.filter(level
 medium_quest=json.loads(serializers.serialize('json',question.objects.filter(level="Medium")))
 
 def index(request):
+    global usr
     if request.method == "POST":
-        global usr
         usr=dict()
         usr['name']=request.POST.get('name')
         return redirect('quiz/')
