@@ -22,7 +22,7 @@ def index(request):
         usr=dict()
         usr['name']=request.POST.get('name')
         return redirect('quiz/')
-    return render(request,'quiz/index.html')
+    return render(request,'quiz/p1.html')
 def quiz(request):
     if request.method == "GET":
         global ques,ques_count
@@ -67,7 +67,7 @@ def quiz(request):
             a['value']=html.unescape(a['Value'])
             for code in htmlCodes:
                 a['Value']=a['Value'].replace(code[1],code[0])
-    return render(request,'quiz/quiz.html',{"quest":ques,"count":ques_count})
+    return render(request,'quiz/p2.html',{"quest":ques,"count":ques_count})
 
 def result(request):
-    return render(request,'quiz/result.html',{'usr_data':usr})
+    return render(request,'quiz/p3.html',{'usr_data':usr})

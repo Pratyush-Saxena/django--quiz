@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - Brand</title>
+    <link rel="stylesheet" href="{% static 'quiz/assets/bootstrap/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic">
+</head>
+
+<body id="page-top">
+    <section class="callout" style="background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), url({% static 'quiz/assets/img/bg-callout.jpg'%});background-position: center center;background-repeat: no-repeat;background-size: cover;width: 100vw;height: 100vh;">
+        <div class="container">
+        {% if count <= 10 %}
+<form action="{% url 'quiz' %}" method="post">
+  {% csrf_token %}
+  <legend style="font-size: x-large;font-weight: bold;">{{count}}.&nbsp;{{quest.fields.question}}&nbsp;&nbsp;&nbsp;<span>({{quest.fields.level}})</span></legend>
+    {% for a in quest.fields.answer %}
+      <div class="custom-control custom-radio" style="font-size:large;"><input type="radio" value="{{a.Value}}" id="{{a.Value}}" class="custom-control-input" name="choice"  required/><label class="custom-control-label" for="{{a.Value}}">{{a.Value}}</label></div>
+    {% endfor %}
+  <br><button class="btn btn-primary btn-xl" type="submit">NEXT</button>
+</form>
+        {% else %}
+        <legend>Thankyou!</legend>
+            <a class="btn btn-primary btn-xl" role="button" href={% url 'result' %}>Show Result</a>
+        {% endif %}
+        </div>
+        <fieldset>
+    
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <script src="{% static 'assets/js/script.min.js'%}"></script>
+
+</body>
+</html>
