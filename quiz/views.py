@@ -16,16 +16,19 @@ easy_quest=json.loads(serializers.serialize('json',question.objects.filter(level
 hard_quest=json.loads(serializers.serialize('json',question.objects.filter(level="Hard")))
 medium_quest=json.loads(serializers.serialize('json',question.objects.filter(level="Medium")))
 
+usr,ques,ques_count=None
+
 def index(request):
+    global usr
+    usr=dict()
     if request.method == "POST":
-        global usr
-        usr=dict()
         usr['name']=request.POST.get('name')
         return redirect('quiz/')
     return render(request,'quiz/p1.html')
+
 def quiz(request):
+    global ques_count,ques,usr
     if request.method == "GET":
-        global ques,ques_count
         ques_count=1
         usr['score']=0
         usr['easy_count']=0
@@ -70,4 +73,5 @@ def quiz(request):
     return render(request,'quiz/p2.html',{"quest":ques,"count":ques_count})
 
 def result(request):
+    global usr
     return render(request,'quiz/p3.html',{'usr_data':usr})
