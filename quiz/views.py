@@ -21,8 +21,13 @@ ques=list()
 ques_count=0
 def index(request):
     global usr
+<<<<<<< HEAD
     usr=dict()
     if request.method == "POST":
+=======
+    if request.method == "POST":
+        usr=dict()
+>>>>>>> 588c0450b26aeaa71b33786b5ce60c1c663e0650
         usr['name']=request.POST.get('name')
         return redirect('quiz/')
     return render(request,'quiz/p1.html')
