@@ -15,7 +15,9 @@ htmlCodes = (
 easy_quest=json.loads(serializers.serialize('json',question.objects.filter(level="Easy")))
 hard_quest=json.loads(serializers.serialize('json',question.objects.filter(level="Hard")))
 medium_quest=json.loads(serializers.serialize('json',question.objects.filter(level="Medium")))
+
 usr,ques,ques_count=None
+
 def index(request):
     global usr
     usr=dict()
