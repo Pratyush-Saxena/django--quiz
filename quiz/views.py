@@ -30,19 +30,19 @@ def quiz(request):
         if choice['Answer']:
             if cache.get('level')=="Easy":
                 ques=medium_quest[random.randrange(0,len(medium_quest))]
-                cache.set('level',"Medium")
+                cache.set('level',"Medium",None)
             else:
                 ques=hard_quest[random.randrange(0,len(hard_quest))]
-                cache.set('level',"Hard")
+                cache.set('level',"Hard",None)
         else:
             if cache.get('level')=="Hard":
                 ques=medium_quest[random.randrange(0,len(medium_quest))]
-                cache.set('level',"Medium")
+                cache.set('level',"Medium",None)
             else:
                 ques=easy_quest[random.randrange(0,len(easy_quest))]
-                cache.set('level',"Easy")
+                cache.set('level',"Easy",None)
     count=cache.get('ques_count')
-    cache.set('ques_count',count+1)
+    cache.set('ques_count',count+1,None)
     return render(request,'quiz/p2.html',{"quest":ques,"count":cache.get('ques_count')})
     
 
