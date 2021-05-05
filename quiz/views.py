@@ -60,7 +60,7 @@ def quiz(request):
             else:
                 ques=easy_quest[random.randrange(0,len(easy_quest))]
                 while(ques in request.session['ques_list']):
-                    ques=medium_quest[random.randrange(0,len(medium_quest))]
+                    ques=easy_quest[random.randrange(0,len(easy_quest))]
                 request.session['level']="Easy"
     request.session['curr_ques']=ques
     request.session['count']+=1
