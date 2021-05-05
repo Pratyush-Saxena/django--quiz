@@ -17,17 +17,13 @@ hard_quest=json.loads(serializers.serialize('json',question.objects.filter(level
 medium_quest=json.loads(serializers.serialize('json',question.objects.filter(level="Medium")))
 
 usr=dict()
-ques=list()
+ques=dict()
 ques_count=0
 def index(request):
     global usr
-<<<<<<< HEAD
     usr=dict()
     if request.method == "POST":
-=======
-    if request.method == "POST":
         usr=dict()
->>>>>>> 588c0450b26aeaa71b33786b5ce60c1c663e0650
         usr['name']=request.POST.get('name')
         return redirect('quiz/')
     return render(request,'quiz/p1.html')
@@ -43,6 +39,7 @@ def quiz(request):
         usr['ques_list']=list()
         ques=easy_quest[random.randrange(0,len(easy_quest))]
     elif request.method == "POST":
+        print(request.session('usr'))
         for a in ques['fields']['answer']:
             if a['Value']==request.POST.get('choice'):
                 q=ques
@@ -52,22 +49,18 @@ def quiz(request):
                     usr['score']+=ques['fields']['score']
                     if ques['fields']['level']=="Easy":
                         usr['easy_count']+=1
-                        while(ques in usr['ques_list']):
-                            ques=medium_quest[random.randrange(0,len(medium_quest))]
+                        ques=medium_quest[random.randrange(0,len(medium_quest))]
                     else:
                         if ques['fields']['level']=="Hard":
                             usr['hard_count']+=1
                         else:
                             usr['medium_count']+=1
-                        while(ques in usr['ques_list']):
-                            ques=hard_quest[random.randrange(0,len(hard_quest))]
+                        ques=hard_quest[random.randrange(0,len(hard_quest))]
                 else:
                     if ques['fields']['level']=="Hard":
-                        while(ques in usr['ques_list']):
-                            ques=medium_quest[random.randrange(0,len(medium_quest))]
+                        ques=medium_quest[random.randrange(0,len(medium_quest))]
                     else:
-                        while(ques in usr['ques_list']):
-                            ques=easy_quest[random.randrange(0,len(easy_quest))]
+                        ques=easy_quest[random.randrange(0,len(easy_quest))]
         ques_count+=1
         ques['fields']['question']=html.unescape(ques['fields']['question'])
         for code in htmlCodes:
