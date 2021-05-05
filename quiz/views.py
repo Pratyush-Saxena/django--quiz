@@ -13,35 +13,34 @@ medium_quest=json.loads(serializers.serialize('json',question.objects.filter(lev
 
 def index(request):
     if request.method == "POST":
-        cache.set('name',request.POST.get('name'),None)
-        cache.set('score',0,None)
-        cache.set('level',"Easy",None)
-        cache.set('ques_count',0,None)
         return redirect('quiz/')
     return render(request,'quiz/p1.html')
 
 def quiz(request):
     if request.method == "GET":
+        request.session['count']=0
+        request.session['score']=0
+        request.session['level']="Easy"
         ques=easy_quest[random.randrange(0,len(easy_quest))]
     else:
         choice=eval(request.POST.get('choice'))
         if choice['Answer']:
-            if cache.get('level')=="Easy":
+            if request.session['level']=="Easy":
                 ques=medium_quest[random.randrange(0,len(medium_quest))]
-                cache.set('level',"Medium",None)
+                request.session['level']="Medium"
             else:
                 ques=hard_quest[random.randrange(0,len(hard_quest))]
-                cache.set('level',"Hard",None)
+                request.session['level']="Hard"
         else:
-            if cache.get('level')=="Hard":
+            if request.session['level']=="Hard":
                 ques=medium_quest[random.randrange(0,len(medium_quest))]
-                cache.set('level',"Medium",None)
+                request.session['level']="Medium"
             else:
                 ques=easy_quest[random.randrange(0,len(easy_quest))]
-                cache.set('level',"Easy",None)
-    cache.incr('ques_count')
-    count=cache.get('ques_count')
-    return render(request,'quiz/p2.html',{"quest":ques,"count":count})
+                request.session['level']="Easy"
+    print(request.session['level'])
+    request.session['count']+=1
+    return render(request,'quiz/p2.html',{"quest":ques,"count":request.session['count']})
 
 def result(request):
     return render(request,'quiz/p3.html')
