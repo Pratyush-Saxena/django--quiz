@@ -39,7 +39,6 @@ def quiz(request):
         usr['ques_list']=list()
         ques=easy_quest[random.randrange(0,len(easy_quest))]
     elif request.method == "POST":
-        print(request.session('usr'))
         for a in ques['fields']['answer']:
             if a['Value']==request.POST.get('choice'):
                 q=ques
