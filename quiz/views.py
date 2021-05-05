@@ -3,64 +3,50 @@ from .models import question
 from django.core import serializers
 import json
 import random,html
+from django.core.cache import cache
 # Create your views here.
-htmlCodes = (
-            ("'", "&#039;"),
-            ('"', '&quot;'),
-            ('>', '&gt;'),
-            ('<', '&lt;'),
-            ('&', '&amp;'),
-            
-        )
+
 easy_quest=json.loads(serializers.serialize('json',question.objects.filter(level="Easy")))
 hard_quest=json.loads(serializers.serialize('json',question.objects.filter(level="Hard")))
 medium_quest=json.loads(serializers.serialize('json',question.objects.filter(level="Medium")))
 
-usr={'name':'xyz'}
-ques=dict()
-ques_count=0
-level="Easy"
 
 
 
 def index(request):
-    global usr
     if request.method == "POST":
-        usr['name']=request.POST.get('name')
-        usr['score']=0
-        usr['ques_list']=list()
-        level="Easy"
-        ques_count=1
+        cache.set('name',request.POST.get('name'),None)
+        cache.set('score',0,None)
+        cache.set('level',"Easy",None)
+        cache.set('ques_count',0,None)
         return redirect('quiz/')
     return render(request,'quiz/p1.html')
 
 def quiz(request):
-    global usr,ques,ques_count,level
     if request.method == "GET":
         ques=easy_quest[random.randrange(0,len(easy_quest))]
     else:
         choice=eval(request.POST.get('choice'))
         if choice['Answer']:
-            if level=="Easy":
+            if cache.get('level')=="Easy":
                 ques=medium_quest[random.randrange(0,len(medium_quest))]
-                level="Medium"
+                cache.set('level',"Medium")
             else:
                 ques=hard_quest[random.randrange(0,len(hard_quest))]
-                level="Hard"
+                cache.set('level',"Hard")
         else:
-            if level=="Hard":
+            if cache.get('level')=="Hard":
                 ques=medium_quest[random.randrange(0,len(medium_quest))]
-                level="Medium"
+                cache.set('level',"Medium")
             else:
                 ques=easy_quest[random.randrange(0,len(easy_quest))]
-                level="Easy"
-    ques_count+=1
-    return render(request,'quiz/p2.html',{"quest":ques,"count":ques_count})
+                cache.set('level',"Easy")
+    cache.set('ques_count',cache.get('ques_count')+1)
+    return render(request,'quiz/p2.html',{"quest":ques,"count":cache.get('ques_count')})
     
 
 def result(request):
-    global usr
-    return render(request,'quiz/p3.html',{'usr_data':usr})
+    return render(request,'quiz/p3.html')
 
 
 """global ques_count,ques
