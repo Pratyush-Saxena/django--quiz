@@ -15,14 +15,7 @@
     <header class="d-flex masthead" style="background-image:url({% static 'quiz/assets/img/bg-masthead.jpg'%})">
         <div class="container text-center my-auto">
             <h1 class="mb-1">Django-Quiz</h1>
-            <h3 class="mb-5"><em>Enter Your Name And Start!</em></h3>
-            <form action="" method="post">
-                {% csrf_token %}
-            <div class="input-group mb-3"  >
-                <div class="input-group-prepend" ><span class="input-group-text"><i class="fa fa-user" style="font-size: 24px;"></i></span></div><input type="text" style="width:90%;" name="name" required>
-            </div>
-            <button class="btn btn-primary btn-xl js-scroll-trigger" role="button" >Start Quiz</button>
-            </form>
+            <a class="btn btn-primary btn-xl js-scroll-trigger" role="button" href={% url 'quiz' %} >Start Quiz</a>
             <div class="overlay"></div>
         </div>
     </header>
