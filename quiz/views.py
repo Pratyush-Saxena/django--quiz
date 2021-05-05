@@ -41,7 +41,8 @@ def quiz(request):
             else:
                 ques=easy_quest[random.randrange(0,len(easy_quest))]
                 cache.set('level',"Easy")
-    cache.set('ques_count',cache.get('ques_count')+1)
+    count=cache.get('ques_count')
+    cache.set('ques_count',count+1)
     return render(request,'quiz/p2.html',{"quest":ques,"count":cache.get('ques_count')})
     
 
