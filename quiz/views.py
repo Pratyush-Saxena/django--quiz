@@ -10,10 +10,7 @@ easy_quest=json.loads(serializers.serialize('json',question.objects.filter(level
 hard_quest=json.loads(serializers.serialize('json',question.objects.filter(level="Hard")))
 medium_quest=json.loads(serializers.serialize('json',question.objects.filter(level="Medium")))
 
-cache.set('name',"xyz",None)
-cache.set('score',0,None)
-cache.set('level',"Easy",None)
-cache.set('ques_count',0,None)
+
 def index(request):
     if request.method == "POST":
         cache.set('name',request.POST.get('name'),None)
