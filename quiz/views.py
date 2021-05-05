@@ -16,20 +16,62 @@ easy_quest=json.loads(serializers.serialize('json',question.objects.filter(level
 hard_quest=json.loads(serializers.serialize('json',question.objects.filter(level="Hard")))
 medium_quest=json.loads(serializers.serialize('json',question.objects.filter(level="Medium")))
 
-usr=dict()
+usr={'name':'xyz'}
 ques=dict()
 ques_count=0
+level="Easy"
+
+def score_update():
+    global usr,level
+    if level=="Easy":
+        usr['score']+=5
+    elif level=="Medium":
+        usr['score']+=10
+    else:
+        usr['score']+=15
+
 def index(request):
     global usr
-    usr=dict()
     if request.method == "POST":
-        usr=dict()
         usr['name']=request.POST.get('name')
+        usr['score']=0
+        usr['ques_list']=list()
+        level="Easy"
+        ques_count=1
         return redirect('quiz/')
     return render(request,'quiz/p1.html')
 
 def quiz(request):
-    global ques_count,ques,usr
+    global usr,ques,ques_count,level
+    if request.method == "GET":
+        ques=easy_quest[random.randrange(0,len(easy_quest))]
+    else:
+        choice=eval(request.POST.get('choice'))
+        if choice['Answer']:
+            score_update()
+            if level=="Easy":
+                ques=medium_quest[random.randrange(0,len(medium_quest))]
+                level="Medium"
+            else:
+                ques=hard_quest[random.randrange(0,len(hard_quest))]
+                level="Hard"
+        else:
+            if level=="Hard":
+                ques=medium_quest[random.randrange(0,len(medium_quest))]
+                level="Medium"
+            else:
+                ques=easy_quest[random.randrange(0,len(easy_quest))]
+                level="Easy"
+    ques_count+=1
+    return render(request,'quiz/p2.html',{"quest":ques,"count":ques_count})
+    
+
+def result(request):
+    global usr
+    return render(request,'quiz/p3.html',{'usr_data':usr})
+
+
+"""global ques_count,ques
     if request.method == "GET":
         ques_count=1
         usr['score']=0
@@ -40,7 +82,7 @@ def quiz(request):
         ques=easy_quest[random.randrange(0,len(easy_quest))]
     elif request.method == "POST":
         for a in ques['fields']['answer']:
-            if a['Value']==request.POST.get('choice'):
+            if a['Value']==dict(request.POST.get('choice'))['Value']:
                 q=ques
                 q.update({'usr_ans':a})
                 usr['ques_list'].append(q)
@@ -61,15 +103,4 @@ def quiz(request):
                     else:
                         ques=easy_quest[random.randrange(0,len(easy_quest))]
         ques_count+=1
-        ques['fields']['question']=html.unescape(ques['fields']['question'])
-        for code in htmlCodes:
-            ques['fields']['question']=ques['fields']['question'].replace(code[1],code[0])
-        for a in ques['fields']['answer']:
-            a['value']=html.unescape(a['Value'])
-            for code in htmlCodes:
-                a['Value']=a['Value'].replace(code[1],code[0])
-    return render(request,'quiz/p2.html',{"quest":ques,"count":ques_count})
-
-def result(request):
-    global usr
-    return render(request,'quiz/p3.html',{'usr_data':usr})
+        print(request.POST.get('choice'))"""
