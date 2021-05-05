@@ -21,14 +21,7 @@ ques=dict()
 ques_count=0
 level="Easy"
 
-def score_update():
-    global usr,level
-    if level=="Easy":
-        usr['score']+=5
-    elif level=="Medium":
-        usr['score']+=10
-    else:
-        usr['score']+=15
+
 
 def index(request):
     global usr
@@ -48,7 +41,6 @@ def quiz(request):
     else:
         choice=eval(request.POST.get('choice'))
         if choice['Answer']:
-            score_update()
             if level=="Easy":
                 ques=medium_quest[random.randrange(0,len(medium_quest))]
                 level="Medium"
