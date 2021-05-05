@@ -10,7 +10,10 @@ easy_quest=json.loads(serializers.serialize('json',question.objects.filter(level
 hard_quest=json.loads(serializers.serialize('json',question.objects.filter(level="Hard")))
 medium_quest=json.loads(serializers.serialize('json',question.objects.filter(level="Medium")))
 
-
+cache.set('name',"xyz",None)
+cache.set('score',0,None)
+cache.set('level',"Easy",None)
+cache.set('ques_count',0,None)
 def index(request):
     if request.method == "POST":
         cache.set('name',request.POST.get('name'),None)
@@ -40,7 +43,8 @@ def quiz(request):
                 ques=easy_quest[random.randrange(0,len(easy_quest))]
                 cache.set('level',"Easy",None)
     cache.incr('ques_count')
-    return render(request,'quiz/p2.html',{"quest":ques,"count":cache.get('ques_count')})
+    count=cache.get('ques_count')
+    return render(request,'quiz/p2.html',{"quest":ques,"count":count})
 
 def result(request):
     return render(request,'quiz/p3.html')
