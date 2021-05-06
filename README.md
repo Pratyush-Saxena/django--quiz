@@ -25,3 +25,8 @@ pip install -r requirements.txt
 ``` bash
 python manage.py runserver
 ```
+## Preview
+
+
+https://user-images.githubusercontent.com/52444607/117269866-48760480-ae76-11eb-8271-c1d10792c8a5.mp4
+
