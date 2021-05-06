@@ -13,7 +13,7 @@ git clone https://github.com/Pratyush-Saxena/django--quiz
 ```bash
 cd django--quiz
 ```
-3. Activate the virtual environment
+3. Activate the virtual environment (optional)
 ```bash
 source venv/bin/activate
 ```
@@ -21,8 +21,10 @@ source venv/bin/activate
 ```bash
 pip install -r requirements.txt
 ```
-5. Run the django server
+6. Run the django server
 ``` bash
+python manage.py makemigrations
+python manage.py migrate
 python manage.py runserver
 ```
 ## Preview
