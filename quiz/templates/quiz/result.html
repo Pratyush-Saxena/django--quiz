@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+{% load static %}
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Result</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Django-Quiz</title>
+    <link rel="stylesheet" href="{% static 'quiz/assets/bootstrap/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic">
 </head>
 <style>
+    body{
+        background-color: #1d809f!important;
+    }
     table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
@@ -20,44 +25,52 @@ td, th {
 }
 
 tr:nth-child(even) {
-  background-color: #dddddd;
+  background-color: #ecb807!important;
 }
 </style>
-<body>
-    <div style="text-align:center">
-        <h2>Hi {{usr_data.name}} </h4>
-    <h3> Your Score : {{usr_data.score}}</h3>
-    </div>
-    
-    <div id="scorecard">
-        <table>
-            <tr>
-                <th>Question</th>
-                <th>Difficulty</th>
-                <th>Your Answer</th>
-                <th>Correct Answer</th>
-                <th>Score</th>
-                <th>Your Score</th>
-            </tr>
-            {% for data in usr_data.ques_list %}
-            <tr>
-                <td>{{data.fields.question}}</td>
-                <td>{{data.fields.level}}</td>
-                <td>{{data.usr_ans.Value}}</td>
-                {% for ans in data.fields.answer %}
-                {% if ans.Answer %}
-                  <td>{{ans.Value}}</td>
-                {% endif %}  
-                {% endfor %}
-                <td>{{data.fields.score}}</td>
-                {% if data.usr_ans.Answer  %}
-                  <td>{{data.fields.score}}</td>
-                {% else %}
-                <td>0</td>
-                {% endif %}
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
+<body id="page-top">
+    <section class="text-center text-white bg-primary content-section" id="services" >
+        <div class="content-section-heading">
+            <h1 class="text-secondary mb-0"><span id="spn" style="color: aliceblue;">Hi!</span> {{usr_data.name}}</h1>
+            <h2 class="mb-5">Your Score : {{usr_data.score}}</h2>
+        </div>
+        <div class="container">
+            <div id="scorecard">
+                <table>
+                    <tr>
+                        <th>Question</th>
+                        <th>Difficulty</th>
+                        <th>Your Answer</th>
+                        <th>Correct Answer</th>
+                        <th>Score</th>
+                        <th>Your Score</th>
+                    </tr>
+                    {% for data in usr_data.ques_list %}
+                    <tr>
+                        <td>{{data.fields.question}}</td>
+                        <td>{{data.fields.level}}</td>
+                        <td>{{data.usr_ans.Value}}</td>
+                        {% for ans in data.fields.answer %}
+                        {% if ans.Answer %}
+                          <td>{{ans.Value}}</td>
+                        {% endif %}  
+                        {% endfor %}
+                        <td>{{data.fields.score}}</td>
+                        {% if data.usr_ans.Answer  %}
+                          <td>{{data.fields.score}}</td>
+                        {% else %}
+                        <td>0</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
 </body>
+
 </html>

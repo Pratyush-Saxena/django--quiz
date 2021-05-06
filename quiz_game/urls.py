@@ -20,5 +20,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index),
     path('quiz/',views.quiz,name='quiz'),
-    path('result/',views.result,name='result')
 ]

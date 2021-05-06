@@ -21,7 +21,7 @@ def update_score(level):
 def index(request):
     if request.method == "POST":
         return redirect('quiz/')
-    return render(request,'quiz/p1.html')
+    return render(request,'quiz/index.html')
 
 def quiz(request):
     if request.method == "GET":
@@ -42,27 +42,29 @@ def quiz(request):
             usr=dict()
             usr['ques_list']=request.session['ques_list']
             usr['score']=request.session['score']
-            return render(request,'quiz/p3.html',{'usr_data':usr})
+            return render(request,'quiz/result.html',{'usr_data':usr})
         if choice['Answer']:
             request.session['score']+=update_score(request.session['level'])
             if request.session['level']=="Easy":
                 ques=medium_quest[request.session['med_ques_itr']]
                 request.session['med_ques_itr']+=1
+                request.session['level']="Medium"
             else:
                 ques=hard_quest[request.session['hard_ques_itr']]
                 request.session['hard_ques_itr']+=1
+                request.session['level']="Hard"
         else:
             if request.session['level']=="Hard":
                 ques=medium_quest[request.session['med_ques_itr']]
                 request.session['med_ques_itr']+=1
+                request.session['level']="Medium"
             else:
                 ques=easy_quest[request.session['easy_ques_itr']]
                 request.session['easy_ques_itr']+=1
+                request.session['level']="Easy"
     request.session['curr_ques']=ques
     request.session['count']+=1
-    return render(request,'quiz/p2.html',{"quest":ques,"count":request.session['count']})
+    return render(request,'quiz/quiz.html',{"quest":ques,"count":request.session['count']})
 
-def result(request):
-    return render(request,'quiz/p3.html')
 
 
