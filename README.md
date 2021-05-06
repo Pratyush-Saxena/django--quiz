@@ -3,6 +3,7 @@ This a quiz web-app built using django.
 
 ## Pre-requisites
 * Python3.9.2 or higher must be installed ( Download from [here](https://www.python.org/downloads/))
+* [Git](https://git-scm.com/downloads) must be installed 
 
 ## How to Run
  1. Clone the repos
@@ -21,12 +22,13 @@ source venv/bin/activate
 ```bash
 pip install -r requirements.txt
 ```
-6. Run the django server
+5. Run the django server
 ``` bash
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 ```
+6. open http://127.0.0.1:8000/ in your browser
 ## Preview
 
 
