@@ -29,7 +29,11 @@ def quiz(request):
         request.session['score']=0
         request.session['level']="Easy"
         request.session['ques_list']=list()
-        ques=easy_quest[random.randrange(0,len(easy_quest))]
+        request.session['easy_ques_itr']=0
+        request.session['med_ques_itr']=0
+        request.session['hard_ques_itr']=0
+        ques=easy_quest[request.session['easy_ques_itr']]
+        request.session['easy_ques_itr']+=1
     else:
         choice=eval(request.POST.get('choice'))
         request.session['curr_ques']['usr_ans']=choice
@@ -42,30 +46,18 @@ def quiz(request):
         if choice['Answer']:
             request.session['score']+=update_score(request.session['level'])
             if request.session['level']=="Easy":
-                ques=medium_quest[random.randrange(0,len(medium_quest))]
-                while(ques in request.session['ques_list']):    
-                    ques=medium_quest[random.randrange(0,len(medium_quest))]
-                    print('trying')
-                request.session['level']="Medium"
+                ques=medium_quest[request.session['med_ques_itr']]
+                request.session['med_ques_itr']+=1
             else:
-                ques=hard_quest[random.randrange(0,len(hard_quest))]
-                while(ques in request.session['ques_list']):
-                    ques=hard_quest[random.randrange(0,len(hard_quest))]
-                    print('trying')
-                request.session['level']="Hard"
+                ques=hard_quest[request.session['hard_ques_itr']]
+                request.session['hard_ques_itr']+=1
         else:
             if request.session['level']=="Hard":
-                ques=medium_quest[random.randrange(0,len(medium_quest))]
-                while(ques in request.session['ques_list']):
-                    ques=medium_quest[random.randrange(0,len(medium_quest))]
-                    print('trying')
-                request.session['level']="Medium"
+                ques=medium_quest[request.session['med_ques_itr']]
+                request.session['med_ques_itr']+=1
             else:
-                ques=easy_quest[random.randrange(0,len(easy_quest))]
-                while(ques in request.session['ques_list']):
-                    ques=easy_quest[random.randrange(0,len(easy_quest))]
-                    print('trying')
-                request.session['level']="Easy"
+                ques=easy_quest[request.session['easy_ques_itr']]
+                request.session['easy_ques_itr']+=1
     request.session['curr_ques']=ques
     request.session['count']+=1
     return render(request,'quiz/p2.html',{"quest":ques,"count":request.session['count']})
